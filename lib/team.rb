@@ -39,5 +39,29 @@ class Team
         total_value_array.sum
     end
 
+    def details
+        details = {
+            "total value" => total_value,
+            "player count" => @roster.length
+        }
+        return details
+
+    end
+
+    def average_cost_of_player
+        "$#{total_value/(@roster.length)}"
+        #didnt have the time to figure out how to add commas to the number
+    end
+
+    def players_by_last_name_array
+        @roster.sort_by do |roster|
+            roster.last_name   
+        end
+    end
+
+    def players_by_last_name
+        players_by_last_name_array.map {|player| player.last_name }.join(", ")
+        
+    end
     
 end
