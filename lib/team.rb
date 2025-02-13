@@ -18,39 +18,51 @@ class Team
     end
 
     def long_term_players
-        @roster.find_all do |roster|
-            roster.contract_length > 24
+        @roster.find_all do |player|
+            player.contract_length > 24
         end
     end
 
     def short_term_players
-        @roster.find_all do |roster|
-            roster.contract_length <= 24
+        @roster.find_all do |player|
+            player.contract_length <= 24
         end
     end
 
     def total_value
-        @roster.map {|roster| roster.total_cost}.sum
+        @roster.map {|player| player.total_cost}.sum
     end
+
+    #@roster.sum do |player|
+        #player.total_cost
+    #end
+
+    #this would work for total_value as well ^^
 
 
     def details
-        {
-            "total value" => total_value,
-            "player count" => @roster.length
-        }
-        
-
+        {"total value" => total_value, "player count" => @roster.length}
     end
+
 
     def average_cost_of_player
-        "$#{total_value/(@roster.length)}"
-        #didnt have the time to figure out how to add commas to the number
+        average = total_value / player_count
+
+        formatted_average = ""
+
+        average.digits.each_with_index do |digit, index|
+            formatted_average = digit.to_s + formatted_average
+            if (index +1) % 3 == 0
+                formatted_average = "," + formatted_average
+            end
+        end 
+        "$#{formatted_average}"
     end
 
+
     def players_by_last_name_array
-        @roster.sort_by do |roster|
-            roster.last_name   
+        @roster.sort_by do |player|
+            player.last_name   
         end
     end
 

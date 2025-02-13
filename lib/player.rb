@@ -4,7 +4,7 @@ class Player
         @name = name
         @monthly_cost = monthly_cost
         @contract_length = contract_length
-        @nickname = nil
+        
         
         
 
@@ -23,6 +23,7 @@ class Player
 
     def set_nickname!(nickname)
         @nickname = nickname
+        #assigning the instance variable
     end
 
     
