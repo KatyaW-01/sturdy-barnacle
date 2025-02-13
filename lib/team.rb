@@ -29,22 +29,17 @@ class Team
         end
     end
 
-    def total_value_array
-        @roster.map do |roster|
-            roster.total_cost
-        end
+    def total_value
+        @roster.map {|roster| roster.total_cost}.sum
     end
 
-    def total_value
-        total_value_array.sum
-    end
 
     def details
-        details = {
+        {
             "total value" => total_value,
             "player count" => @roster.length
         }
-        return details
+        
 
     end
 
